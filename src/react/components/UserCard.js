@@ -1,17 +1,29 @@
 import React from "react";
+import { withAsyncAction } from "../HOCs";
+import { Spinner } from "../components";
 
-const fakeUser = {
-  pictureLocation: null, // URI to download the picture
-  username: "testuser",
-  displayName: "Taylor Hurt",
-  about: "",
-  googleId: null,
-  createdAt: "2019-11-18T15:10:16.100Z",
-  updatedAt: "2019-11-18T15:10:16.100Z"
-};
+// const fakeUser = {
+//   pictureLocation: null, // URI to download the picture
+//   username: "testuser",
+//   displayName: "Taylor Hurt",
+//   about: "",
+//   googleId: null,
+//   createdAt: "2019-11-18T15:10:16.100Z",
+//   updatedAt: "2019-11-18T15:10:16.100Z"
+// };
 
 class UserCard extends React.Component {
+  componentDidMount() {
+    this.props.getUser("testuser");
+  }
+
   render() {
+    if (this.props.result === null) {
+      return <Spinner name="circle" color="blue" />;
+    }
+
+    const user = this.props.result.user;
+
     return (
       <div
         style={{
@@ -25,25 +37,34 @@ class UserCard extends React.Component {
         <img
           style={{ maxWidth: "20em" }}
           src={
-            fakeUser.pictureLocation
-              ? fakeUser.pictureLocation
+            user.pictureLocation
+              ? user.pictureLocation
               : "http://simpleicon.com/wp-content/uploads/user1.svg"
           }
         />
-        <h3>{fakeUser.displayName}</h3>
-        <p>{fakeUser.username}</p>
+        <h3>{user.displayName}</h3>
+        <p>{user.username}</p>
 
-        {fakeUser.about ? (
-          <p>{fakeUser.about}</p>
+        {user.about ? (
+          <p>{user.about}</p>
         ) : (
           <p style={{ color: "grey" }}>You do not have about details yet</p>
         )}
 
-        <p>Created: {new Date(fakeUser.createdAt).toDateString()}</p>
-        <p>Last Updated: {new Date(fakeUser.updatedAt).toDateString()}</p>
+        <p>Created: {new Date(user.createdAt).toDateString()}</p>
+        <p>Last Updated: {new Date(user.updatedAt).toDateString()}</p>
       </div>
     );
   }
 }
 
-export default UserCard;
+/*
+mapStateToProps
+  loading
+  error
+  result
+
+mapDispatchToProps
+  getUser
+*/
+export default withAsyncAction("users", "getUser")(UserCard);
