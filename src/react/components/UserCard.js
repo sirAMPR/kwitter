@@ -14,7 +14,7 @@ import { Spinner } from "../components";
 
 class UserCard extends React.Component {
   componentDidMount() {
-    this.props.getUser("testuser");
+    this.props.getUser(this.props.username);
   }
 
   render() {

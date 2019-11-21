@@ -9,10 +9,10 @@ class Profile extends React.Component {
         <Menu isAuthenticated={this.props.isAuthenticated} />
         <h2>Profile</h2>
         <div style={{ display: "flex" }}>
-          <UserCard />
+          <UserCard username={this.props.match.params.username} />
           <div style={{ display: "flex", flexDirection: "column", flex: 1 }}>
             <h3>Your messages</h3>
-            <MessageList />
+            <MessageList username={this.props.match.params.username} />
           </div>
         </div>
       </>
