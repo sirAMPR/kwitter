@@ -1,6 +1,6 @@
 import React from "react";
 import { withAsyncAction } from "../HOCs";
-import { Spinner } from "../components";
+import { Spinner } from ".";
 
 // const fakeUser = {
 //   pictureLocation: null, // URI to download the picture

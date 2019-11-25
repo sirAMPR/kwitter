@@ -11,6 +11,7 @@ const getInitStateFromStorage = (key, initialState) => {
   const storedState = JSON.parse(localStorage.getItem(key));
 
   if (storedState) {
+    // ensuring that every property in initialState is also in storedState and vice versa
     const unchangedInitialStateProps =
       Object.keys(storedState).every(
         property => initialState[property] !== undefined
@@ -22,6 +23,7 @@ const getInitStateFromStorage = (key, initialState) => {
       return storedState;
     }
   }
+
   return initialState;
 };
 
@@ -31,7 +33,7 @@ const login = (
 ) => {
   switch (action.type) {
     case LOGOUT.SUCCESS:
-      return { ...initialState };
+      return { ...initialState }; // clearing out the user's token
     default:
       return state;
   }
