@@ -4,6 +4,7 @@ export { default as Menu } from "./Menu";
 export { default as UserCard } from "./UserCard";
 export { default as MessageList } from "./MessageList";
 export { default as RegisterForm } from "./RegisterForm";
+export { default as CreateMessageForm } from "./CreateMessageForm";
 
 // components from other packages
 export { Switch, Route, Link } from "react-router-dom";

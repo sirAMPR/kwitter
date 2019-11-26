@@ -15,3 +15,4 @@ export const GETUSER = createActionTypes("GETUSER");
 export const POSTUSER = createActionTypes("POSTUSER");
 // messages
 export const GETMESSAGES = createActionTypes("GETMESSAGES");
+export const POSTMESSAGE = createActionTypes("POSTMESSAGE");
