@@ -1,5 +1,6 @@
 import { domain, jsonHeaders, handleJsonResponse } from "./constants";
 import { GETMESSAGES, POSTMESSAGE } from "../actionTypes";
+import { push } from "connected-react-router";
 
 const url = domain + "/messages";
 
@@ -52,6 +53,9 @@ const _postMessage = postMessageBody => (dispatch, getState) => {
 
 export const postMessage = postMessageBody => (dispatch, getState) => {
   return dispatch(_postMessage(postMessageBody)).then(() =>
-    dispatch(getMessages())
+    dispatch(getMessages()).then(() => {
+      const username = getState().auth.login.result.username;
+      return dispatch(push(`/profile/${username}`));
+    })
   );
 };

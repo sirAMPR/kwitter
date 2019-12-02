@@ -1,6 +1,6 @@
 import React from "react";
 import { withAsyncAction } from "../HOCs";
-import { Spinner } from ".";
+import { Spinner, DeleteUserButton } from ".";
 
 // const fakeUser = {
 //   pictureLocation: null, // URI to download the picture
@@ -53,6 +53,7 @@ class UserCard extends React.Component {
 
         <p>Created: {new Date(user.createdAt).toDateString()}</p>
         <p>Last Updated: {new Date(user.updatedAt).toDateString()}</p>
+        <DeleteUserButton />
       </div>
     );
   }

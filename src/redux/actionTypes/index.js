@@ -13,6 +13,7 @@ export const LOGOUT = createActionTypes("LOGOUT");
 // users
 export const GETUSER = createActionTypes("GETUSER");
 export const POSTUSER = createActionTypes("POSTUSER");
+export const DELETEUSER = createActionTypes("DELETEUSER");
 // messages
 export const GETMESSAGES = createActionTypes("GETMESSAGES");
 export const POSTMESSAGE = createActionTypes("POSTMESSAGE");

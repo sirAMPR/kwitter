@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from ".";
 
 // const fakeMessage = {
 //   id: 937,
@@ -19,7 +20,9 @@ class MessageCard extends React.Component {
           margin: "2em"
         }}
       >
-        <h4>{this.props.username}</h4>
+        <Link to={`/profile/${this.props.username}`}>
+          <h4>{this.props.username}</h4>
+        </Link>
         <p>{this.props.text}</p>
         <p>{new Date(this.props.createdAt).toDateString()}</p>
       </div>
