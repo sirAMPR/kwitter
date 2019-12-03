@@ -1,6 +1,6 @@
 import React from "react";
 import { withAsyncAction } from "../HOCs";
-import { Spinner, DeleteUserButton } from ".";
+import { Spinner, DeleteUserButton, UploadUserPicture } from ".";
 
 // const fakeUser = {
 //   pictureLocation: null, // URI to download the picture
@@ -15,6 +15,13 @@ import { Spinner, DeleteUserButton } from ".";
 class UserCard extends React.Component {
   componentDidMount() {
     this.props.getUser(this.props.username);
+  }
+
+  componentDidUpdate(prevProps) {
+    // Typical usage (don't forget to compare props):
+    if (this.props.username !== prevProps.username) {
+      this.props.getUser(this.props.username);
+    }
   }
 
   render() {
@@ -38,7 +45,7 @@ class UserCard extends React.Component {
           style={{ maxWidth: "20em" }}
           src={
             user.pictureLocation
-              ? user.pictureLocation
+              ? "https://kwitter-api.herokuapp.com" + user.pictureLocation
               : "http://simpleicon.com/wp-content/uploads/user1.svg"
           }
         />
@@ -53,7 +60,8 @@ class UserCard extends React.Component {
 
         <p>Created: {new Date(user.createdAt).toDateString()}</p>
         <p>Last Updated: {new Date(user.updatedAt).toDateString()}</p>
-        <DeleteUserButton />
+        <DeleteUserButton username={this.props.username} />
+        <UploadUserPicture username={this.props.username} />
       </div>
     );
   }

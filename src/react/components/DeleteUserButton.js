@@ -1,5 +1,5 @@
 import React from "react";
-import { withAsyncAction } from "../HOCs";
+import { withAsyncAction, connect } from "../HOCs";
 
 class DeleteUserButton extends React.Component {
   handleDeleteUser = event => {
@@ -12,7 +12,11 @@ class DeleteUserButton extends React.Component {
   };
 
   render() {
-    return <button onClick={this.handleDeleteUser}>Delete your account</button>;
+    return (
+      this.props.username === this.props.loggedInUsername && (
+        <button onClick={this.handleDeleteUser}>Delete your account</button>
+      )
+    );
   }
 }
 
@@ -24,5 +28,16 @@ mapStateToProps
 
 mapDispatchToProps
   deleteUser
+
+  loggedInUsername
 */
-export default withAsyncAction("users", "deleteUser")(DeleteUserButton);
+
+const mapStateToProps = state => {
+  return {
+    loggedInUsername: state.auth.login.result.username
+  };
+};
+
+export default connect(mapStateToProps)(
+  withAsyncAction("users", "deleteUser")(DeleteUserButton)
+);

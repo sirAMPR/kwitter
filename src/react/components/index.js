@@ -6,6 +6,7 @@ export { default as MessageList } from "./MessageList";
 export { default as RegisterForm } from "./RegisterForm";
 export { default as CreateMessageForm } from "./CreateMessageForm";
 export { default as DeleteUserButton } from "./DeleteUserButton";
+export { default as UploadUserPicture } from "./UploadUserPicture";
 
 // components from other packages
 export { Switch, Route, Link, NavLink } from "react-router-dom";

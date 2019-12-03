@@ -24,6 +24,13 @@ class MessageList extends React.Component {
     this.props.getMessages(this.props.username);
   }
 
+  componentDidUpdate(prevProps) {
+    // Typical usage (don't forget to compare props):
+    if (this.props.username !== prevProps.username) {
+      this.props.getMessages(this.props.username);
+    }
+  }
+
   render() {
     return (
       this.props.result &&
