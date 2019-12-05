@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from ".";
+import { Link, DeleteMessageButton, ToggleLikeButton } from ".";
 
 // const fakeMessage = {
 //   id: 937,
@@ -25,6 +25,12 @@ class MessageCard extends React.Component {
         </Link>
         <p>{this.props.text}</p>
         <p>{new Date(this.props.createdAt).toDateString()}</p>
+        <p>Likes: {this.props.likes.length}</p>
+        <ToggleLikeButton messageId={this.props.id} />
+        <DeleteMessageButton
+          username={this.props.username}
+          messageId={this.props.id}
+        />
       </div>
     );
   }

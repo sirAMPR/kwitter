@@ -75,7 +75,7 @@ export const deleteUser = () => (dispatch, getState) => {
     });
 };
 
-export const putUserPicture = formTag => (dispatch, getState) => {
+const _putUserPicture = formElement => (dispatch, getState) => {
   dispatch({ type: PUTUSERPICTURE.START });
 
   const { username, token } = getState().auth.login.result;
@@ -86,7 +86,7 @@ export const putUserPicture = formTag => (dispatch, getState) => {
       Authorization: "Bearer " + token,
       Accept: "application/json"
     },
-    body: new FormData(formTag)
+    body: new FormData(formElement)
   })
     .then(handleJsonResponse)
     .then(result => {
@@ -100,4 +100,11 @@ export const putUserPicture = formTag => (dispatch, getState) => {
         dispatch({ type: PUTUSERPICTURE.FAIL, payload: err })
       );
     });
+};
+
+export const putUserPicture = formElement => (dispatch, getState) => {
+  return dispatch(_putUserPicture(formElement)).then(() => {
+    const username = getState().auth.login.result.username;
+    return dispatch(getUser(username));
+  });
 };
