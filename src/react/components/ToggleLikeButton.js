@@ -1,26 +1,34 @@
 import React from "react";
-import { withAsyncAction } from "../HOCs";
+import { connect } from "../HOCs";
+import { toggleLike } from "../../redux/actionCreators";
 
+// this.props.toggleLike
+// this.props.likes
+// this.props.loggedInUsername
 class ToggleLikeButton extends React.Component {
   handleToggleLike = event => {
-    this.props.addLike(this.props.messageId);
+    this.props.toggleLike(this.props.messageId);
   };
 
   render() {
-    return <button onClick={this.handleToggleLike}>Like/Unlike</button>;
+    const isLiked = this.props.likes.find(
+      like => like.username === this.props.loggedInUsername
+    );
+    return (
+      <button onClick={this.handleToggleLike}>
+        {isLiked ? "Unlike" : "Like"}
+      </button>
+    );
   }
 }
 
-/*
-mapStateToProps
-  loading
-  error
-  result
+const mapStateToProps = state => {
+  return {
+    loggedInUsername: state.auth.login.result.username
+  };
+};
+const mapDispatchToProps = {
+  toggleLike
+};
 
-mapDispatchToProps
-  addLike
-
-  loggedInUsername
-*/
-
-export default withAsyncAction("likes", "addLike")(ToggleLikeButton);
+export default connect(mapStateToProps, mapDispatchToProps)(ToggleLikeButton);

@@ -26,7 +26,7 @@ class MessageCard extends React.Component {
         <p>{this.props.text}</p>
         <p>{new Date(this.props.createdAt).toDateString()}</p>
         <p>Likes: {this.props.likes.length}</p>
-        <ToggleLikeButton messageId={this.props.id} />
+        <ToggleLikeButton messageId={this.props.id} likes={this.props.likes} />
         <DeleteMessageButton
           username={this.props.username}
           messageId={this.props.id}
