@@ -17,6 +17,8 @@ export const DELETEUSER = createActionTypes("DELETEUSER");
 export const PUTUSERPICTURE = createActionTypes("PUTUSERPICTURE");
 // messages
 export const GETMESSAGES = createActionTypes("GETMESSAGES");
+export const GETMOREMESSAGES = createActionTypes("GETMOREMESSAGES");
+export const GETMESSAGE = createActionTypes("GETMESSAGE");
 export const POSTMESSAGE = createActionTypes("POSTMESSAGE");
 export const DELETEMESSAGE = createActionTypes("DELETEMESSAGE");
 // likes

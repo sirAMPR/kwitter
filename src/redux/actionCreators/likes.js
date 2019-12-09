@@ -1,6 +1,6 @@
 import { handleJsonResponse, jsonHeaders, domain } from "./constants";
 import { ADDLIKE, REMOVELIKE } from "../actionTypes";
-import { getMessages } from ".";
+import { getMessage } from "./messages";
 
 const url = domain + "/likes";
 
@@ -15,9 +15,11 @@ export const toggleLike = messageId => (dispatch, getState) => {
   // if we didnt find a message, then we cant do the following task.
   // this is also known as an "invariant"
   if (!message) {
-    throw "Expected to find message with id of " +
-      messageId +
-      " but it did not exist";
+    throw new Error(
+      "Expected to find message with id of " +
+        messageId +
+        " but it did not exist"
+    );
   }
 
   // look inside message.likes
@@ -25,7 +27,7 @@ export const toggleLike = messageId => (dispatch, getState) => {
   const like = message.likes.find(like => like.username === username);
 
   if (like) {
-    return dispatch(removeLike(like.id));
+    return dispatch(removeLike(like.id, messageId));
   }
   return dispatch(addLike(messageId));
 };
@@ -55,14 +57,9 @@ const _addLike = messageId => (dispatch, getState) => {
 };
 
 const addLike = messageId => (dispatch, getState) => {
-  return dispatch(_addLike(messageId)).then(() => {
-    const username = getState().auth.login.result.username;
-    const pathname = getState().router.location.pathname;
-    if (pathname === "/messagefeed") {
-      return dispatch(getMessages());
-    }
-    return dispatch(getMessages(username));
-  });
+  return dispatch(_addLike(messageId)).then(() =>
+    dispatch(getMessage(messageId))
+  );
 };
 
 const _removeLike = likeId => (dispatch, getState) => {
@@ -88,13 +85,8 @@ const _removeLike = likeId => (dispatch, getState) => {
     });
 };
 
-const removeLike = likeId => (dispatch, getState) => {
-  return dispatch(_removeLike(likeId)).then(() => {
-    const username = getState().auth.login.result.username;
-    const pathname = getState().router.location.pathname;
-    if (pathname === "/messagefeed") {
-      return dispatch(getMessages());
-    }
-    return dispatch(getMessages(username));
-  });
+const removeLike = (likeId, messageId) => dispatch => {
+  return dispatch(_removeLike(likeId)).then(() =>
+    dispatch(getMessage(messageId))
+  );
 };

@@ -1,6 +1,8 @@
 import React from "react";
 import MessageCard from "./MessageCard";
-import { withAsyncAction } from "../HOCs";
+import { withAsyncAction, connect } from "../HOCs";
+import InfiniteScroll from "react-infinite-scroller";
+import { getMoreMessages } from "../../redux/actionCreators";
 
 // const messages = [
 //   {
@@ -31,21 +33,43 @@ class MessageList extends React.Component {
     }
   }
 
-  render() {
+  loadMore = () => {
+    this.props.getMoreMessages(this.props.username);
+  };
+
+  hasMore = () => {
     return (
       this.props.result &&
-      this.props.result.messages.map(message => {
-        return (
-          <MessageCard
-            key={message.id}
-            username={message.username}
-            text={message.text}
-            createdAt={message.createdAt}
-            id={message.id}
-            likes={message.likes}
-          />
-        );
-      })
+      this.props.result.messages.length < this.props.result.count
+    );
+  };
+
+  render() {
+    return (
+      <InfiniteScroll
+        pageStart={0}
+        loadMore={this.loadMore}
+        hasMore={this.hasMore()}
+        loader={
+          <div className="loader" key={0}>
+            Loading ...
+          </div>
+        }
+      >
+        {this.props.result &&
+          this.props.result.messages.map(message => {
+            return (
+              <MessageCard
+                key={message.id}
+                username={message.username}
+                text={message.text}
+                createdAt={message.createdAt}
+                id={message.id}
+                likes={message.likes}
+              />
+            );
+          })}
+      </InfiniteScroll>
     );
   }
 }
@@ -58,5 +82,14 @@ mapStateToProps
 
 mapDispatchToProps
   getMessages
+
+  getMoreMessages
 */
-export default withAsyncAction("messages", "getMessages")(MessageList);
+
+const mapDispatchToProps = {
+  getMoreMessages
+};
+export default connect(
+  null,
+  mapDispatchToProps
+)(withAsyncAction("messages", "getMessages")(MessageList));

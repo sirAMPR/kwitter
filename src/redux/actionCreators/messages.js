@@ -1,5 +1,11 @@
 import { domain, jsonHeaders, handleJsonResponse } from "./constants";
-import { GETMESSAGES, POSTMESSAGE, DELETEMESSAGE } from "../actionTypes";
+import {
+  GETMESSAGES,
+  POSTMESSAGE,
+  DELETEMESSAGE,
+  GETMOREMESSAGES,
+  GETMESSAGE
+} from "../actionTypes";
 import { push } from "connected-react-router";
 
 const url = domain + "/messages";
@@ -25,6 +31,67 @@ export const getMessages = username => dispatch => {
     })
     .catch(err => {
       return Promise.reject(dispatch({ type: GETMESSAGES.FAIL, payload: err }));
+    });
+};
+
+export const getMoreMessages = username => (dispatch, getState) => {
+  // an invariant
+  const getMessagesState = getState().messages.getMessages;
+  if (getMessagesState.loading) {
+    return;
+  }
+
+  dispatch({
+    type: GETMOREMESSAGES.START
+  });
+
+  // const endpointUrl = username ? url + "?username=" + username : url;
+  const endpointUrl = new URL(url);
+  if (username) {
+    endpointUrl.searchParams.set("username", username);
+  }
+
+  endpointUrl.searchParams.set(
+    "offset",
+    getMessagesState.result.messages.length
+  );
+
+  return fetch(endpointUrl.toString(), {
+    method: "GET",
+    headers: jsonHeaders
+  })
+    .then(handleJsonResponse)
+    .then(result => {
+      return dispatch({
+        type: GETMOREMESSAGES.SUCCESS,
+        payload: result
+      });
+    })
+    .catch(err => {
+      return Promise.reject(
+        dispatch({ type: GETMOREMESSAGES.FAIL, payload: err })
+      );
+    });
+};
+
+export const getMessage = messageId => dispatch => {
+  dispatch({
+    type: GETMESSAGE.START
+  });
+
+  return fetch(url + "/" + messageId, {
+    method: "GET",
+    headers: jsonHeaders
+  })
+    .then(handleJsonResponse)
+    .then(result => {
+      return dispatch({
+        type: GETMESSAGE.SUCCESS,
+        payload: result
+      });
+    })
+    .catch(err => {
+      return Promise.reject(dispatch({ type: GETMESSAGE.FAIL, payload: err }));
     });
 };
 
