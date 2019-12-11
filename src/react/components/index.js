@@ -9,6 +9,7 @@ export { default as DeleteUserButton } from "./DeleteUserButton";
 export { default as UploadUserPicture } from "./UploadUserPicture";
 export { default as DeleteMessageButton } from "./DeleteMessageButton";
 export { default as ToggleLikeButton } from "./ToggleLikeButton";
+export { default as UserList } from "./UserList";
 
 // components from other packages
 export { Switch, Route, Link, NavLink } from "react-router-dom";
