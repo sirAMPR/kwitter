@@ -9,4 +9,4 @@ export { default as UserInfoCard } from "./UserInfoCard";
 // components from other packages
 export { Switch, Route, Link } from "react-router-dom";
 export { default as Spinner } from "react-spinkit";
-export { Card, Form, Button, Image } from "semantic-ui-react";
+export { Card, Form, Button, Image, Input } from "semantic-ui-react";

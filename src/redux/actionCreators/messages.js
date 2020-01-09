@@ -1,4 +1,4 @@
-import { GETMESSAGES } from "../actionTypes";
+import { GETMESSAGES, CREATEMESSAGE } from "../actionTypes";
 import { jsonHeaders, handleJsonResponse, domain } from "./constants";
 
 const url = domain + "/messages";
@@ -21,5 +21,31 @@ export const getMessages = () => dispatch => {
     })
     .catch(err => {
       return Promise.reject(dispatch({ type: GETMESSAGES.FAIL, payload: err }));
+    });
+};
+
+export const createMessage = messageText => (dispatch, getState) => {
+  dispatch({
+    type: CREATEMESSAGE.START
+  });
+
+  const token = getState().auth.login.result.token;
+
+  return fetch(url, {
+    method: "POST",
+    headers: { Authorization: "Bearer " + token, ...jsonHeaders },
+    body: JSON.stringify({ text: messageText })
+  })
+    .then(handleJsonResponse)
+    .then(result => {
+      return dispatch({
+        type: CREATEMESSAGE.SUCCESS,
+        payload: result
+      });
+    })
+    .catch(err => {
+      return Promise.reject(
+        dispatch({ type: CREATEMESSAGE.FAIL, payload: err })
+      );
     });
 };
