@@ -24,7 +24,8 @@ export const getMessages = () => dispatch => {
     });
 };
 
-export const createMessage = messageText => (dispatch, getState) => {
+// asynchrous action creator
+const _createMessage = messageText => (dispatch, getState) => {
   dispatch({
     type: CREATEMESSAGE.START
   });
@@ -48,4 +49,12 @@ export const createMessage = messageText => (dispatch, getState) => {
         dispatch({ type: CREATEMESSAGE.FAIL, payload: err })
       );
     });
+};
+
+// chained action creator
+// createMessage -> getMessages
+export const createMessage = messageText => (dispatch, getState) => {
+  return dispatch(_createMessage(messageText)).then(() =>
+    dispatch(getMessages())
+  );
 };

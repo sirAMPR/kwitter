@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import { Input, Button, Form } from "../components";
-import { connect } from "../HOCs";
-import { createMessage } from "../../redux/actionCreators";
+import { Input, Button, Form, Spinner } from "../components";
+import { withAsyncAction } from "../HOCs";
 
 class CreateMessageForm extends Component {
   state = {
@@ -29,18 +28,25 @@ class CreateMessageForm extends Component {
               placeholder="Add your message"
             />
           </Form.Field>
-          <Button type="submit" onClick={this.handleCreateMessage}>
+          <Button
+            type="submit"
+            onClick={this.handleCreateMessage}
+            disabled={this.props.loading}
+          >
             Create Message
           </Button>
         </Form>
+        {this.props.loading && <Spinner name="circle" color="blue" />}
+        {this.props.error && (
+          <p style={{ color: "red" }}>{this.props.error.message}</p>
+        )}
       </>
     );
   }
 }
 
+// this.props.loading
+// this.props.error
+// this.props.result
 // this.props.createMessage
-const mapDispatchToProps = {
-  createMessage
-};
-
-export default connect(null, mapDispatchToProps)(CreateMessageForm);
+export default withAsyncAction("messages", "createMessage")(CreateMessageForm);
