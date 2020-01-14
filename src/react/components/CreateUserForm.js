@@ -1,23 +1,56 @@
 import React, { Component } from "react";
 import { Form, Button } from "../components";
+import { withAsyncAction } from "../HOCs";
 
 class CreateUserForm extends Component {
+  state = {
+    username: "",
+    displayName: "",
+    password: ""
+  };
+
+  handleChange = event => {
+    this.setState({ [event.target.name]: event.target.value });
+  };
+
+  handleRegister = event => {
+    this.props.createUser(
+      this.state.username,
+      this.state.displayName,
+      this.state.password
+    );
+  };
+
   render() {
     return (
       <Form>
         <Form.Field>
           <label>Username</label>
-          <input placeholder="Username" />
+          <input
+            name="username"
+            placeholder="Username"
+            onChange={this.handleChange}
+          />
         </Form.Field>
         <Form.Field>
           <label>Display Name</label>
-          <input placeholder="Display Name" />
+          <input
+            name="displayName"
+            placeholder="Display Name"
+            onChange={this.handleChange}
+          />
         </Form.Field>
         <Form.Field>
           <label>Password</label>
-          <input placeholder="Password" />
+          <input
+            name="password"
+            placeholder="Password"
+            onChange={this.handleChange}
+          />
         </Form.Field>
-        <Button type="submit">Register</Button>
+        <Button type="submit" onClick={this.handleRegister}>
+          Register
+        </Button>
       </Form>
     );
     // return (
@@ -34,4 +67,8 @@ class CreateUserForm extends Component {
   }
 }
 
-export default CreateUserForm;
+// this.props.loading
+// this.props.error
+// this.props.result
+// this.props.createUser
+export default withAsyncAction("users", "createUser")(CreateUserForm);
