@@ -1,4 +1,4 @@
-import { LOGIN, LOGOUT } from "../../actionTypes";
+import { LOGIN, LOGOUT, DELETEUSER } from "../../actionTypes";
 import { withAsyncReducer } from "../../HORs";
 
 const initialState = {
@@ -31,6 +31,8 @@ const login = (
 ) => {
   switch (action.type) {
     case LOGOUT.SUCCESS:
+      return { ...initialState };
+    case DELETEUSER.SUCCESS:
       return { ...initialState };
     default:
       return state;

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { Card, Image } from "../components";
+import { Card, Image, Button } from "../components";
+import { withAsyncAction } from "../HOCs";
 
 const fakeUser = {
   pictureLocation: null,
@@ -12,6 +13,12 @@ const fakeUser = {
 };
 
 class UserInfoCard extends Component {
+  handleDeleteUser = event => {
+    console.log("clicked delete user button");
+    console.log(this.props.deleteUser);
+    this.props.deleteUser();
+  };
+
   render() {
     return (
       <Card>
@@ -31,6 +38,7 @@ class UserInfoCard extends Component {
           <p>Created: {new Date(fakeUser.createdAt).toDateString()}</p>
           <p>Last Updated: {new Date(fakeUser.updatedAt).toDateString()}</p>
         </Card.Content>
+        <Button onClick={this.handleDeleteUser}>Delete your account</Button>
       </Card>
     );
     // return (
@@ -45,4 +53,8 @@ class UserInfoCard extends Component {
   }
 }
 
-export default UserInfoCard;
+// this.props.loading
+// this.props.error
+// this.props.result
+// this.props.deleteUser
+export default withAsyncAction("users", "deleteUser")(UserInfoCard);
