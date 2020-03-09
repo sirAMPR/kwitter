@@ -9,7 +9,7 @@ import {
   createReducer
 } from "./helpers";
 
-const url = domain + "/auth";
+const url = domain;
 
 // create user
 const CREATE_USER = createActions("createUser");
@@ -31,7 +31,7 @@ const GET_USER = createActions("getUser");
 export const getUser = getUserData => dispatch => {
   dispatch(GET_USER.START());
 
-  return fetch(url + "/users/", {
+  return fetch(url + "/users/rad", {
     method: "GET",
     headers: jsonHeaders,
     body: JSON.stringify(getUserData)
@@ -46,6 +46,7 @@ export const reducers = {
     ...asyncCases(CREATE_USER)
   }),
   getUser: createReducer(asyncInitialState, {
-    ...asyncCases(CREATE_USER)
+    ...asyncCases(GET_USER)
+    // [GET_USER.SUCCESS]: (state, action) => asyncInitialState
   })
 };
