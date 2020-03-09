@@ -26,8 +26,26 @@ export const createUser = createUserData => dispatch => {
     .catch(err => Promise.reject(dispatch(CREATE_USER.FAIL(err))));
 };
 
+// get user data
+const GET_USER = createActions("getUser");
+export const getUser = getUserData => dispatch => {
+  dispatch(GET_USER.START());
+
+  return fetch(url + "/users/", {
+    method: "GET",
+    headers: jsonHeaders,
+    body: JSON.stringify(getUserData)
+  })
+    .then(handleJsonResponse)
+    .then(result => dispatch(GET_USER.SUCCESS(result)))
+    .catch(err => Promise.reject(dispatch(GET_USER.FAIL(err))));
+};
+
 export const reducers = {
   createUser: createReducer(asyncInitialState, {
+    ...asyncCases(CREATE_USER)
+  }),
+  getUser: createReducer(asyncInitialState, {
     ...asyncCases(CREATE_USER)
   })
 };
