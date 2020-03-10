@@ -2,7 +2,7 @@ import {
   domain,
   jsonHeaders,
   handleJsonResponse,
-  getInitStateFromStorage,
+  // getInitStateFromStorage,
   asyncInitialState,
   asyncCases,
   createActions,
@@ -41,6 +41,21 @@ export const getUser = getUserData => dispatch => {
     .catch(err => Promise.reject(dispatch(GET_USER.FAIL(err))));
 };
 
+// set profile picture data
+const SET_PROFILE_PIC = createActions("setProfilePic");
+export const setProfilePic = setProfilePicData => dispatch => {
+  dispatch(SET_PROFILE_PIC.START());
+
+  return fetch(url + "/users/jndetke2184/picture", {
+    method: "PUT",
+    headers: jsonHeaders,
+    body: JSON.stringify(setProfilePicData)
+  })
+    .then(handleJsonResponse)
+    .then(result => dispatch(SET_PROFILE_PIC.SUCCESS(result)))
+    .catch(err => Promise.reject(dispatch(SET_PROFILE_PIC.FAIL(err))));
+};
+
 export const reducers = {
   createUser: createReducer(asyncInitialState, {
     ...asyncCases(CREATE_USER)
@@ -48,5 +63,8 @@ export const reducers = {
   getUser: createReducer(asyncInitialState, {
     ...asyncCases(GET_USER)
     // [GET_USER.SUCCESS]: (state, action) => asyncInitialState
+  }),
+  setProfilePic: createReducer(asyncInitialState, {
+    ...asyncCases(SET_PROFILE_PIC)
   })
 };
