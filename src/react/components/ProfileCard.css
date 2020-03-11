@@ -1,0 +1,17 @@
+.card {
+    background-color: rgb(80, 229, 255);
+    display: flex;
+    width: 300px;
+    height: 400px;
+}
+
+.middle {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.delete {
+    display: flex;
+    justify-content: center;
+}
