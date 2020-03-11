@@ -28,27 +28,30 @@ export const createUser = createUserData => dispatch => {
 
 // get user data
 const GET_USER = createActions("getUser");
-export const getUser = getUserData => dispatch => {
+export const getUser = () => (dispatch, getState) => {
   dispatch(GET_USER.START());
 
-  return fetch(url + "/users/rad", {
+  const { username } = getState().auth.login.result;
+
+  return fetch(url + "/users/" + username, {
     method: "GET",
-    headers: jsonHeaders,
-    body: JSON.stringify(getUserData)
+    headers: jsonHeaders
   })
     .then(handleJsonResponse)
     .then(result => dispatch(GET_USER.SUCCESS(result)))
     .catch(err => Promise.reject(dispatch(GET_USER.FAIL(err))));
 };
 
-// set profile picture data
+// set profile picture
 const SET_PROFILE_PIC = createActions("setProfilePic");
-export const setProfilePic = setProfilePicData => dispatch => {
+export const setProfilePic = setProfilePicData => (dispatch, getState) => {
   dispatch(SET_PROFILE_PIC.START());
 
-  return fetch(url + "/users/jndetke2184/picture", {
+  const { username, token } = getState().auth.login.result;
+
+  return fetch(url + `/users/${username}/picture`, {
     method: "PUT",
-    headers: jsonHeaders,
+    headers: { Authorization: "Bearer " + token, ...jsonHeaders },
     body: JSON.stringify(setProfilePicData)
   })
     .then(handleJsonResponse)
@@ -62,7 +65,6 @@ export const reducers = {
   }),
   getUser: createReducer(asyncInitialState, {
     ...asyncCases(GET_USER)
-    // [GET_USER.SUCCESS]: (state, action) => asyncInitialState
   }),
   setProfilePic: createReducer(asyncInitialState, {
     ...asyncCases(SET_PROFILE_PIC)
