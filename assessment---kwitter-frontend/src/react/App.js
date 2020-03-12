@@ -3,8 +3,6 @@ import { Switch, Route } from "react-router-dom";
 import Home from "./Home";
 import Profile from "./Profile";
 import NotFound from "./NotFound";
-import MessageFeed from "./MessageFeed";
-import 'semantic-ui-css/semantic.min.css';
 
 class App extends React.Component {
   render() {
@@ -12,7 +10,6 @@ class App extends React.Component {
       <Switch>
         <Route exact path="/" component={Home} />
         <Route exact path="/profiles/:username" component={Profile} />
-        <Route path ="/messagefeed" component={ MessageFeed}/>
         <Route path="*" component={NotFound} />
       </Switch>
     );
