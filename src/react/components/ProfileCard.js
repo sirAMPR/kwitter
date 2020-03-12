@@ -5,9 +5,7 @@ import { getUser, setProfilePic } from "../../redux";
 class ProfileCard extends React.Component {
   state = {
     displayName: "",
-    profilePic: {
-      picture: ""
-    }
+    picture: ""
   };
 
   componentDidMount = () => {
@@ -20,11 +18,18 @@ class ProfileCard extends React.Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    this.props.setProfilePic(this.state.profilePic);
+    this.props.setProfilePic(this.state);
   };
 
   handleChange = e => {
-    this.setState({ profilePic: { picture: e.target.value } });
+    const file = e.target.files[0];
+    let reader = new FileReader();
+
+    reader.onload = () => {
+      this.setState({ picture: reader.result });
+    };
+
+    reader.readAsBinaryString(file);
   };
 
   render() {
