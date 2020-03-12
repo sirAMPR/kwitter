@@ -4,7 +4,6 @@ export { default as MessageList } from "./MessageList"
 export { default as CreateMessageForm } from "./CreateMessageForm"
 export { default as ToggleLikeButton } from "./ToggleLikeButton"
 export { default as DeleteMessageButton } from "./DeleteMessageButton"
+export { default as ProfileCard }from "./ProfileCard"
 
 
-export { Switch, Route, Link }from "react-router-dom"
-export { }
