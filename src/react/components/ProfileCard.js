@@ -21,19 +21,20 @@ class ProfileCard extends React.Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    this.props.setProfilePic(this.state);
+    console.log(e.target);
+    this.props.setProfilePic(e.target);
   };
 
-  handleChange = e => {
-    const file = e.target.files[0];
-    let reader = new FileReader();
+  // handleChange = e => {
+  //   const file = e.target.files[0];
+  //   let reader = new FileReader();
 
-    reader.onload = () => {
-      this.setState({ picture: reader.result });
-    };
+  //   reader.onload = () => {
+  //     this.setState({ picture: reader.result });
+  //   };
 
-    reader.readAsBinaryString(file);
-  };
+  //   reader.readAsBinaryString(file);
+  // };
 
   render() {
     return (
@@ -42,14 +43,19 @@ class ProfileCard extends React.Component {
         <img src={domain + this.state.pictureLocation}></img>
         <br></br>
         <label htmlFor="avatar">Choose a profile picture</label>
-        <input
-          type="file"
-          id="avatar"
-          onChange={this.handleChange}
-          accept="image/png, image/jpeg, image/gif"
-        ></input>
+        {/* // form */}
+        <form onSubmit={this.handleSubmit}>
+          <input
+            type="file"
+            id="avatar"
+            name="picture"
+            // onChange={this.handleChange}
+            accept="image/png, image/jpeg, image/gif"
+          ></input>
+          <input type="submit" value="Save Profile"></input>
+          {/* <button onClick={this.handleSubmit}>Save Profile</button> */}
+        </form>
         <br></br>
-        <button onClick={this.handleSubmit}>Save Profile</button>
       </>
     );
   }
