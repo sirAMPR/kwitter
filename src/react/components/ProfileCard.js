@@ -1,19 +1,22 @@
 import React from "react";
 import { connect } from "react-redux";
 import { getUser, setProfilePic } from "../../redux";
+import { domain } from "../../redux/helpers";
 
 class ProfileCard extends React.Component {
   state = {
     displayName: "",
+    pictureLocation: "",
     picture: ""
   };
 
   componentDidMount = () => {
-    this.props
-      .getUser()
-      .then(val =>
-        this.setState({ displayName: val.payload.user.displayName })
-      );
+    this.props.getUser().then(val =>
+      this.setState({
+        displayName: val.payload.user.displayName,
+        pictureLocation: val.payload.user.pictureLocation
+      })
+    );
   };
 
   handleSubmit = e => {
@@ -36,6 +39,8 @@ class ProfileCard extends React.Component {
     return (
       <>
         <div>{this.state.displayName}</div>
+        <img src={domain + this.state.pictureLocation}></img>
+        <br></br>
         <label htmlFor="avatar">Choose a profile picture</label>
         <input
           type="file"
@@ -43,6 +48,7 @@ class ProfileCard extends React.Component {
           onChange={this.handleChange}
           accept="image/png, image/jpeg, image/gif"
         ></input>
+        <br></br>
         <button onClick={this.handleSubmit}>Save Profile</button>
       </>
     );
