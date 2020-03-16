@@ -1,12 +1,30 @@
 import React from "react";
 import { connect } from "react-redux";
 import { getUser, setProfilePic } from "../../redux";
+import { Card, Icon, Image } from "semantic-ui-react"
+
+const fakeUser = {
+  pictureLocation: null,
+  username: "benmckenzie",
+  displayName: "ben",
+  about: "",
+  googleId: null,
+  createdAt: "2020-03-10T14:41:55.829Z",
+  updatedAt: "2020-03-10T14:41:55.829Z"
+}
 
 class ProfileCard extends React.Component {
+// render() {
+//   return (
+//     <>
+
+//     </>
+//   )
+// }
   state = {
     displayName: "",
     picture: ""
-  };
+   };
 
   componentDidMount = () => {
     this.props
