@@ -47,12 +47,15 @@ const SET_PROFILE_PIC = createActions("setProfilePic");
 export const setProfilePic = setProfilePicData => (dispatch, getState) => {
   dispatch(SET_PROFILE_PIC.START());
 
+  let data = new FormData(setProfilePicData);
+  console.log(data);
+
   const { username, token } = getState().auth.login.result;
 
   return fetch(url + `/users/${username}/picture`, {
     method: "PUT",
-    headers: { Authorization: "Bearer " + token, ...jsonHeaders },
-    body: JSON.stringify(setProfilePicData)
+    headers: { Authorization: "Bearer " + token, Accept: "application/json" },
+    body: data
   })
     .then(handleJsonResponse)
     .then(result => dispatch(SET_PROFILE_PIC.SUCCESS(result)))
