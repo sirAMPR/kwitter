@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Card } from "semantic-ui-react"
+import ToggleLikeButton from './ToggleLikeButton';
+import DeleteMessageButton from './DeleteMessageButton';
 
 
 const fakeMessages = [
@@ -35,15 +37,12 @@ class MessageList extends Component {
                   <Card.Content description={message.text} />
                   <Card.Content extra>
                     {/* <Icon name='user' />4 Friends */}
-                    Created: {new Date(message.createdAt).toDateString()}
+                    <p>Created: {new Date(message.createdAt).toDateString()}</p>
+                    <ToggleLikeButton likes= {message.likes}/>
+                    <DeleteMessageButton/>
                   </Card.Content>
                 </Card>
             )
-        // <div>
-        //     <h4>{message.username}</h4>
-        //     <p>{message.text}</p>
-        // <p>Created: {message.createdAt}</p>
-        // </div>
         });
     }
 }
