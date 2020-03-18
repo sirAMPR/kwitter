@@ -10,14 +10,14 @@ class Profile extends React.Component {
       <>
         <Menu isAuthenticated={this.props.isAuthenticated} />
         <h2>Profile</h2>
-        <Grid>
-          <Grid.Column width = {6}>
-            <ProfileCard />
-          </Grid.Column>
-          <Grid.Column width = {9}>
+        {/* <Grid>
+          <Grid.Column width = {6}> */}
+        <ProfileCard />
+        {/* </Grid.Column> */}
+        {/* <Grid.Column width = {9}>
             <MessageList />
-          </Grid.Column>
-        </Grid>
+          </Grid.Column> */}
+        {/* </Grid> */}
         <ProfilePicSubmit />
       </>
     );

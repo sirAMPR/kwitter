@@ -1,8 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
-import { getUser, /*setProfilePic*/ } from "../../redux";
+import { getUser /*setProfilePic*/ } from "../../redux";
 import { domain } from "../../redux/helpers";
-import { Card, Image } from "semantic-ui-react";
+import { Button, Card, Image } from "semantic-ui-react";
+import "./ProfileCard.css";
 
 class ProfileCard extends React.Component {
   state = {
@@ -34,20 +35,29 @@ class ProfileCard extends React.Component {
     const updateDate = new Date(this.state.updatedAt);
 
     return (
-      <Card>
-        <Image src={domain + this.state.pictureLocation} wrapped ui={false} />
-        <Card.Content>
-          <Card.Header>{this.state.displayName}</Card.Header>
-          <Card.Meta>
-            <span className="date">{this.state.username}</span>
-          </Card.Meta>
-          <Card.Description>{this.state.about}</Card.Description>
-        </Card.Content>
-        <Card.Content extra>
-          <p> Joined: {createDate.toDateString()}</p>
-          <p> Last Updated: {updateDate.toDateString()} </p>
-        </Card.Content>
-      </Card>
+      <div className="wrapper">
+        <Card id="card">
+          {/* <Image src={domain + this.state.pictureLocation} wrapped ui={false} /> */}
+          <Card.Content>
+            <Card.Header>{this.state.displayName}</Card.Header>
+            <Card.Meta>
+              <span className="date">@{this.state.username}</span>
+            </Card.Meta>
+            <Card.Description>{this.state.about}</Card.Description>
+          </Card.Content>
+          <Card.Content extra>
+            <p> Joined: {createDate.toDateString()}</p>
+            <p> Last Updated: {updateDate.toDateString()} </p>
+          </Card.Content>
+        </Card>
+        <Image
+          id="avatar"
+          src={domain + this.state.pictureLocation}
+          size="medium"
+          circular
+        />
+        <Button className="button">Edit profile</Button>
+      </div>
     );
   }
 }
