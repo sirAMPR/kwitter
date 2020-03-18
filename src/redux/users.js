@@ -9,14 +9,12 @@ import {
   createReducer
 } from "./helpers";
 
-const url = domain;
-
 // create user
 const CREATE_USER = createActions("createUser");
 export const createUser = createUserData => dispatch => {
   dispatch(CREATE_USER.START());
 
-  return fetch(url + "/users", {
+  return fetch(domain + "/users", {
     method: "POST",
     headers: jsonHeaders,
     body: JSON.stringify(createUserData)
@@ -33,7 +31,7 @@ export const getUser = () => (dispatch, getState) => {
 
   const { username } = getState().auth.login.result;
 
-  return fetch(url + "/users/" + username, {
+  return fetch(domain + "/users/" + username, {
     method: "GET",
     headers: jsonHeaders
   })
@@ -52,7 +50,7 @@ export const setProfilePic = setProfilePicData => (dispatch, getState) => {
 
   const { username, token } = getState().auth.login.result;
 
-  return fetch(url + `/users/${username}/picture`, {
+  return fetch(domain + `/users/${username}/picture`, {
     method: "PUT",
     headers: { Authorization: "Bearer " + token, Accept: "application/json" },
     body: data
