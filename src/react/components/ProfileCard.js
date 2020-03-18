@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { getUser, setProfilePic } from "../../redux";
+import { getUser, /*setProfilePic*/ } from "../../redux";
 import { domain } from "../../redux/helpers";
 import { Card, Image } from "semantic-ui-react";
 
