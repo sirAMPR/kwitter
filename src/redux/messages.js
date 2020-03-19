@@ -34,11 +34,29 @@ export const listMessage = (limit = 100, offset = 0, username) => dispatch => {
 };
 
 // create a message
+const ADD_MESSAGE = createActions("addMessage");
+export const addMessage = addMessageData => dispatch => {
+  dispatch(ADD_MESSAGE.START());
+
+  console.log(addMessageData);
+
+  return fetch(url, {
+    method: "POST",
+    headers: jsonHeaders,
+    body: JSON.stringify(addMessageData)
+  })
+    .then(handleJsonResponse)
+    .then(result => dispatch(ADD_MESSAGE.SUCCESS(result)))
+    .catch(err => Promise.reject(dispatch(ADD_MESSAGE.FAIL(err))));
+};
 
 // delete a message
 
 export const reducers = {
   listMessage: createReducer(asyncInitialState, {
     ...asyncCases(LIST_MESSAGE)
+  }),
+  addMessage: createReducer(asyncInitialState, {
+    ...asyncCases(ADD_MESSAGE)
   })
 };
