@@ -1,50 +1,28 @@
-import React, { Component } from 'react';
-import { Card } from "semantic-ui-react"
-import ToggleLikeButton from './ToggleLikeButton';
-import DeleteMessageButton from './DeleteMessageButton';
-
-
-const fakeMessages = [
-    {
-    id: 2411,
-    text: "Happy Tuesday",
-    username: "004262009",
-    createdAt: "2020-03-10T13:08:24.033Z",
-    likes: []
-  },
-  {
-    id: 2410,
-    text: "the big oof",
-    username: "Rcharity",
-    createdAt: "2020-03-10T06:38:21.014Z",
-    likes: [
-      {
-        id: 3412,
-        username: "004262009",
-        messageId: 2410,
-        createdAt: "2020-03-10T13:08:12.620Z"
-      }
-    ]
-  },
-]
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { Message } from ".";
+// import { userIsAuthenticated } from "../HOCs";
+import { listMessage } from "../../redux";
 
 class MessageList extends Component {
-    render() {
-        return fakeMessages.map(message => {
-            return (
-                <Card>
-                  <Card.Content header={message.username} />
-                  <Card.Content description={message.text} />
-                  <Card.Content extra>
-                    {/* <Icon name='user' />4 Friends */}
-                    <p>Created: {new Date(message.createdAt).toDateString()}</p>
-                    <ToggleLikeButton likes= {message.likes}/>
-                    <DeleteMessageButton/>
-                  </Card.Content>
-                </Card>
-            )
-        });
-    }
+  componentDidMount = () => {
+    this.props.listMessage(100, 0).then(val => console.log(val));
+  };
+
+  render() {
+    return (
+      <>
+        <Message />
+      </>
+    );
+  }
 }
 
-export default MessageList;
+export default connect(
+  state => ({
+    result: state.messages.listMessage.result,
+    loading: state.messages.listMessage.loading,
+    error: state.messages.listMessage.error
+  }),
+  { listMessage }
+)(MessageList);
