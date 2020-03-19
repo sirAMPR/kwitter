@@ -5,14 +5,28 @@ import { Message } from ".";
 import { listMessage } from "../../redux";
 
 class MessageList extends Component {
+  state = {
+    messages: []
+  };
+
   componentDidMount = () => {
-    this.props.listMessage(100, 0).then(val => console.log(val));
+    this.props
+      .listMessage(100, 0)
+      .then(val => this.setState({ messages: val.payload.messages }));
   };
 
   render() {
     return (
       <>
-        <Message />
+        {this.state.messages.map(msg => (
+          <Message
+            createdAt={msg.createdAt}
+            id={msg.id}
+            likes={msg.likes}
+            text={msg.text}
+            username={msg.username}
+          />
+        ))}
       </>
     );
   }

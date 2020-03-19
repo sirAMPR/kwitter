@@ -24,8 +24,6 @@ export const listMessage = (limit = 100, offset = 0, username) => dispatch => {
     offset +
     (username ? "&username=" + username : "");
 
-  console.log(endpointUrl);
-
   return fetch(endpointUrl, {
     method: "GET",
     headers: jsonHeaders
