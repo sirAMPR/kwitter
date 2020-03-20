@@ -4,18 +4,17 @@ import { addMessage } from "../../redux";
 
 class CreateMessageForm extends Component {
   state = {
-    message: ""
+    text: ""
   };
 
   handlePost = e => {
-    if (e.key === "Enter") {
-      this.props.addMessage(this.state);
-      //   this.setState({ message: "" });
-    }
+    e.preventDefault();
+    this.props.addMessage(this.state);
+    this.setState({ text: "" });
   };
 
   handleChange = e => {
-    this.setState({ message: e.target.value });
+    this.setState({ [e.target.name]: e.target.value });
   };
 
   render() {
@@ -23,8 +22,9 @@ class CreateMessageForm extends Component {
       <>
         <form onSubmit={this.handlePost}>
           <input
+            type="text"
+            name="text"
             placeholder="Place Kweet here"
-            onKeyDown={this.handlePost}
             onChange={this.handleChange}
           ></input>
           <button type="submit">Post</button>

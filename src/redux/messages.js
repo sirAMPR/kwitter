@@ -35,14 +35,14 @@ export const listMessage = (limit = 100, offset = 0, username) => dispatch => {
 
 // create a message
 const ADD_MESSAGE = createActions("addMessage");
-export const addMessage = addMessageData => dispatch => {
+export const addMessage = addMessageData => (dispatch, getState) => {
   dispatch(ADD_MESSAGE.START());
 
-  console.log(addMessageData);
+  const token = getState().auth.login.result.token;
 
   return fetch(url, {
     method: "POST",
-    headers: jsonHeaders,
+    headers: { Authorization: "Bearer " + token, ...jsonHeaders },
     body: JSON.stringify(addMessageData)
   })
     .then(handleJsonResponse)
