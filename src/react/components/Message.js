@@ -38,7 +38,7 @@ class Message extends Component {
           {/* <Icon name='user' />4 Friends */}
           <p>Created: {new Date(this.props.createdAt).toDateString()}</p>
           {/* <ToggleLikeButton likes={this.props.likes} /> */}
-          <DeleteMessageButton />
+          <DeleteMessageButton id={this.props.id} />
         </Card.Content>
       </Card>
     );
