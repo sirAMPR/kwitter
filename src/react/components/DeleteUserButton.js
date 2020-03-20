@@ -3,17 +3,14 @@ import { connect } from "react-redux";
 import { deleteUser } from "../../redux";
 
 class DeleteUser extends React.Component {
-    handleDelete = e => {
-        e.preventDefault();
-        this.props.deleteUser();
-    };
+  handleDelete = e => {
+    e.preventDefault();
+    this.props.deleteUser();
+  };
 
-    render() {
-        return (
-            <button onClick={this.handleDelete}>Delete User</button>
-        )
-    }
+  render() {
+    return <button onClick={this.handleDelete}>Delete User</button>;
+  }
 }
 
-export default connect(null,
-    { deleteUser })(DeleteUser);
+export default connect(null, { deleteUser })(DeleteUser);

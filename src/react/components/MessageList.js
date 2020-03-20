@@ -11,7 +11,7 @@ class MessageList extends Component {
 
   componentDidMount = () => {
     this.props
-      .listMessage(100, 0)
+      .listMessage(100, 0, this.props.isUserList ? this.props.username : null)
       .then(val => this.setState({ messages: val.payload.messages }));
   };
 
@@ -36,7 +36,8 @@ export default connect(
   state => ({
     result: state.messages.listMessage.result,
     loading: state.messages.listMessage.loading,
-    error: state.messages.listMessage.error
+    error: state.messages.listMessage.error,
+    username: state.auth.login.result.username
   }),
   { listMessage }
 )(MessageList);

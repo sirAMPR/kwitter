@@ -8,4 +8,4 @@ export { default as DeleteMessageButton } from "./DeleteMessageButton";
 export { default as ProfileCard } from "./ProfileCard";
 export { default as ProfilePicSubmit } from "./ProfilePicSubmit";
 export { Card, Form, Button, Image, Input } from "semantic-ui-react";
-export { default as DeleteUser } from "./DeleteUserButton";
+export { default as DeleteUserButton } from "./DeleteUserButton";
