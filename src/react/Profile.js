@@ -19,6 +19,7 @@ class Profile extends React.Component {
           </Grid.Column>
         </Grid>
         <ProfilePicSubmit />
+        <DeleteUser />
       </>
     );
   }
