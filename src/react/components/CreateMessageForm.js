@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Input, Button } from "../components";
 import { addMessage } from "../../redux";
 
 class CreateMessageForm extends Component {
@@ -21,13 +22,13 @@ class CreateMessageForm extends Component {
     return (
       <>
         <form onSubmit={this.handlePost}>
-          <input
+          <Input
             type="text"
             name="text"
-            placeholder="Place Kweet here"
+            placeholder="Add your message"
             onChange={this.handleChange}
-          ></input>
-          <button type="submit">Post</button>
+          ></Input>
+          <Button type="submit">Post</Button>
         </form>
       </>
     );
