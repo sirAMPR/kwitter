@@ -1,7 +1,7 @@
 import React from "react";
 import { Menu } from "./components";
 import { userIsAuthenticated } from "./HOCs";
-import { ProfileCard, ProfilePicSubmit, MessageList } from "./components";
+import { ProfileCard, ProfilePicSubmit, MessageList, DeleteUser } from "./components";
 import { Grid } from "semantic-ui-react";
 
 class Profile extends React.Component {
@@ -19,6 +19,7 @@ class Profile extends React.Component {
           </Grid.Column>
         </Grid>
         <ProfilePicSubmit />
+        <DeleteUser />
       </>
     );
   }
