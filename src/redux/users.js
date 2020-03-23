@@ -9,6 +9,8 @@ import {
   createReducer
 } from "./helpers";
 
+const LOGOUT = createActions("logout");
+
 // create user
 const CREATE_USER = createActions("createUser");
 export const createUser = createUserData => dispatch => {
@@ -60,6 +62,23 @@ export const setProfilePic = setProfilePicData => (dispatch, getState) => {
     .catch(err => Promise.reject(dispatch(SET_PROFILE_PIC.FAIL(err))));
 };
 
+// delete the user that's currently logged on
+const DELETE_USER = createActions("deleteUser");
+export const deleteUser = deleteUserData => (dispatch, getState) => {
+  dispatch(DELETE_USER.START());
+
+  const { username, token } = getState().auth.login.result;
+
+  return fetch(domain + `/users/${username}`, {
+    method: "DELETE",
+    headers: { Authorization: "Bearer " + token, ...jsonHeaders },
+  })
+    .then(handleJsonResponse)
+    .then(result => dispatch(DELETE_USER.SUCCESS(result)))
+    .catch(err => Promise.reject(dispatch(SET_PROFILE_PIC.FAIL(err))))
+    .then((result) => dispatch(LOGOUT.SUCCESS(result)))
+};
+
 export const reducers = {
   createUser: createReducer(asyncInitialState, {
     ...asyncCases(CREATE_USER)
@@ -69,5 +88,8 @@ export const reducers = {
   }),
   setProfilePic: createReducer(asyncInitialState, {
     ...asyncCases(SET_PROFILE_PIC)
+  }),
+  deleteUser: createReducer(asyncInitialState, {
+    ...asyncCases(DELETE_USER)
   })
 };
