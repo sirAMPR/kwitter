@@ -25,6 +25,7 @@ class MessageList extends Component {
             likes={msg.likes}
             text={msg.text}
             username={msg.username}
+            id={msg.id}
           />
         ))}
       </>
