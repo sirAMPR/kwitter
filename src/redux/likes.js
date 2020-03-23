@@ -28,9 +28,26 @@ export const like = likeData => (dispatch, getState) => {
 };
 
 // Remove like
+const DELETE_LIKE = createActions("deleteLike");
+export const deleteLike = likeId => (dispatch, getState) => {
+  dispatch(DELETE_LIKE.START());
+
+  const token = getState().auth.login.result.token;
+
+  return fetch(url + "/" + likeId, {
+    method: "DELETE",
+    headers: { Authorization: "Bearer " + token, ...jsonHeaders }
+  })
+    .then(handleJsonResponse)
+    .then(result => dispatch(DELETE_LIKE.SUCCESS(result)))
+    .catch(err => Promise.reject(dispatch(DELETE_LIKE.FAIL(err))));
+};
 
 export const reducers = {
   like: createReducer(asyncInitialState, {
     ...asyncCases(LIKE)
+  }),
+  deleteLike: createReducer(asyncInitialState, {
+    ...asyncCases(DELETE_LIKE)
   })
 };
