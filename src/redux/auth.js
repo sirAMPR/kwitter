@@ -11,6 +11,20 @@ import {
 
 const url = domain + "/auth";
 
+const SIGNUP = createActions("signup");
+export const signup = signupData => dispatch => {
+  dispatch(SIGNUP.START());
+
+  return fetch(url + "/signup", {
+    method: "POST",
+    headers:  jsonHeaders,
+    body: JSON.stringify(signupData)
+  })
+    .then(handleJsonResponse)
+    .then(result => dispatch(SIGNUP.SUCCESS(result)))
+    .catch(err => Promise.reject(dispatch(SIGNUP.FAIL(err))));
+};
+
 const LOGIN = createActions("login");
 export const login = loginData => dispatch => {
   dispatch(LOGIN.START());
@@ -41,6 +55,10 @@ export const logout = () => (dispatch, getState) => {
 };
 
 export const reducers = {
+  signup: createReducer(getInitStateFromStorage("signup", asyncInitialState), {
+    ...asyncCases(SIGNUP),
+    [LOGOUT.SUCCESS.toString()]: (state, action) => asyncInitialState
+  }),
   login: createReducer(getInitStateFromStorage("login", asyncInitialState), {
     ...asyncCases(LOGIN),
     [LOGOUT.SUCCESS.toString()]: (state, action) => asyncInitialState
