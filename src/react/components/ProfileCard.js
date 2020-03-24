@@ -56,7 +56,7 @@ class ProfileCard extends React.Component {
           size="medium"
           circular
         />
-        <Button className="button">Edit profile</Button>
+        <Button className="edit-profile-button">Edit profile</Button>
       </div>
     );
   }
