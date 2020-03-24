@@ -6,4 +6,10 @@
 
 #message-input {
   margin-right: 20px;
+  margin-left: 10px;
+}
+
+#post-button {
+  background-color: #e29578;
+  color: white;
 }
