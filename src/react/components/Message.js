@@ -12,10 +12,8 @@ class Message extends Component {
         <Card.Content description={this.props.text} />
         <Card.Content extra>
           <p>Created: {new Date(this.props.createdAt).toDateString()}</p>
-          <ToggleLikeButton likes={this.props.likes} />
-          {this.props.username === this.props.logInUser &&
-          <DeleteMessageButton id={this.props.id} />
-      }
+          <ToggleLikeButton likes={this.props.likes} id={this.props.id} />
+          {this.props.username === this.props.logInUser && <DeleteMessageButton id={this.props.id} />}
         </Card.Content>
       </Card>
     );
