@@ -30,7 +30,7 @@ class CreateMessageForm extends Component {
             placeholder="Add your message"
             onChange={this.handleChange}
           ></Input>
-          <Button color="teal" type="submit">
+          <Button id="post-button" type="submit">
             Post
           </Button>
         </form>
