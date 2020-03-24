@@ -15,8 +15,6 @@ class Profile extends React.Component {
         <Menu isAuthenticated={this.props.isAuthenticated} />
         <ProfileCard />
         <MessageList isUserList={true} />
-        <ProfilePicSubmit />
-        <DeleteUserButton />
       </>
     );
   }

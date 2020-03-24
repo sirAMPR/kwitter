@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { ProfilePicSubmit, DeleteUserButton } from ".";
 import { getUser /*setProfilePic*/ } from "../../redux";
 import { domain } from "../../redux/helpers";
 import { Button, Card, Image, Modal, Header } from "semantic-ui-react";
@@ -61,20 +62,17 @@ class ProfileCard extends React.Component {
             <Button className="edit-profile-button">Edit Profile</Button>
           }
         >
-          <Modal.Header>Select a Photo</Modal.Header>
+          <Modal.Header>Edit Profile</Modal.Header>
           <Modal.Content image>
             <Image
               wrapped
               size="medium"
-              src="https://react.semantic-ui.com/images/avatar/large/rachel.png"
+              src={domain + this.state.pictureLocation}
             />
             <Modal.Description>
-              <Header>Default Profile Image</Header>
-              <p>
-                We've found the following gravatar image associated with your
-                e-mail address.
-              </p>
-              <p>Is it okay to use this photo?</p>
+              <Header>Choose Profile Picture</Header>
+              <ProfilePicSubmit />
+              <DeleteUserButton />
             </Modal.Description>
           </Modal.Content>
         </Modal>
