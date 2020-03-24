@@ -9,7 +9,6 @@ class MessageFeed extends React.Component {
     return (
       <>
         <Menu isAuthenticated={this.props.isAuthenticated} />
-        <h2>Message Feed</h2>
         <CreateMessageForm />
         <MessageList isUserList={false} />
         {/* create message feature component name CreateMessageForm*/}
