@@ -7,7 +7,7 @@ import {
   MessageList,
   DeleteUserButton
 } from "./components";
-import { Grid } from "semantic-ui-react";
+// import { Grid } from "semantic-ui-react";
 
 class Profile extends React.Component {
   render() {
