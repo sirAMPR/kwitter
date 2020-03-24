@@ -3,9 +3,7 @@ import { Menu } from "./components";
 import { userIsAuthenticated } from "./HOCs";
 import {
   ProfileCard,
-  ProfilePicSubmit,
-  MessageList,
-  DeleteUserButton
+  MessageList
 } from "./components";
 
 class Profile extends React.Component {
