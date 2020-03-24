@@ -21,7 +21,7 @@ class MessageList extends Component {
         {this.state.messages.map(msg => (
           <Message
             createdAt={msg.createdAt}
-            key={msg.id}
+            id={msg.id}
             likes={msg.likes}
             text={msg.text}
             username={msg.username}
