@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Card } from "semantic-ui-react";
 import ToggleLikeButton from "./ToggleLikeButton";
 import DeleteMessageButton from "./DeleteMessageButton";
+import { connect } from "../HOCs";
 
 // const fakeMessages = [
 //     {
@@ -38,7 +39,9 @@ class Message extends Component {
           {/* <Icon name='user' />4 Friends */}
           <p>Created: {new Date(this.props.createdAt).toDateString()}</p>
           {/* <ToggleLikeButton likes={this.props.likes} /> */}
+          {this.props.username === this.props.logInUser &&
           <DeleteMessageButton id={this.props.id} />
+      }
         </Card.Content>
       </Card>
     );
@@ -46,4 +49,4 @@ class Message extends Component {
   }
 }
 
-export default Message;
+export default connect(state=>({logInUser: state.auth.login.result.username}))(Message)
