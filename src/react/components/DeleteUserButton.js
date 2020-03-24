@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { Button } from "semantic-ui-react";
 import { deleteUser } from "../../redux";
 
 class DeleteUser extends React.Component {
@@ -9,7 +10,11 @@ class DeleteUser extends React.Component {
   };
 
   render() {
-    return <button onClick={this.handleDelete}>Delete User</button>;
+    return (
+      <Button className="ui red" onClick={this.handleDelete}>
+        Delete User
+      </Button>
+    );
   }
 }
 

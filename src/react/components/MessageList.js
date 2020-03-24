@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { Message } from ".";
 // import { userIsAuthenticated } from "../HOCs";
 import { listMessage } from "../../redux";
+import "./MessageList.css";
 
 class MessageList extends Component {
   state = {
@@ -17,18 +18,18 @@ class MessageList extends Component {
 
   render() {
     return (
-      <>
+      <div className="message-list-wrapper">
         {this.state.messages.map(msg => (
           <Message
-            createdAt={msg.createdAt}
             id={msg.id}
+            createdAt={msg.createdAt}
+            key={msg.id}
             likes={msg.likes}
             text={msg.text}
             username={msg.username}
-            id={msg.id}
           />
         ))}
-      </>
+      </div>
     );
   }
 }
