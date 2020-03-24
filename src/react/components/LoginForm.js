@@ -2,6 +2,7 @@ import React from "react";
 import Spinner from "react-spinkit";
 import { connect } from "react-redux";
 import { login } from "../../redux";
+import { Button, Form } from "semantic-ui-react";
 import "./LoginForm.css";
 
 class LoginForm extends React.Component {
@@ -20,26 +21,32 @@ class LoginForm extends React.Component {
     const { loading, error } = this.props;
     return (
       <React.Fragment>
-        <form id="login-form" onSubmit={this.handleLogin}>
-          <label htmlFor="username">Username</label>
-          <input
-            type="text"
-            name="username"
-            autoFocus
-            required
-            onChange={this.handleChange}
-          />
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            name="password"
-            required
-            onChange={this.handleChange}
-          />
-          <button type="submit" disabled={loading}>
+        <Form id="login-form" onSubmit={this.handleLogin}>
+          <Form.Field>
+            <label>Username</label>
+            <input
+              type="text"
+              name="username"
+              autoFocus
+              placeholder="Username"
+              required
+              onChange={this.handleChange}
+            />
+          </Form.Field>
+          <Form.Field>
+            <label>Password</label>
+            <input
+              type="password"
+              placeholder="Password"
+              name="password"
+              required
+              onChange={this.handleChange}
+            />
+          </Form.Field>
+          <Button type="submit" disabled={loading}>
             Login
-          </button>
-        </form>
+          </Button>
+        </Form>
         {loading && <Spinner name="circle" color="blue" />}
         {error && <p style={{ color: "red" }}>{error.message}</p>}
       </React.Fragment>
