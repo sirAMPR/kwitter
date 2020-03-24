@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { getUser /*setProfilePic*/ } from "../../redux";
 import { domain } from "../../redux/helpers";
-import { Button, Card, Image } from "semantic-ui-react";
+import { Button, Card, Image, Modal, Header } from "semantic-ui-react";
 import "./ProfileCard.css";
 
 class ProfileCard extends React.Component {
@@ -56,7 +56,29 @@ class ProfileCard extends React.Component {
           size="medium"
           circular
         />
-        <Button className="edit-profile-button">Edit profile</Button>
+        <Modal
+          trigger={
+            <Button className="edit-profile-button">Edit Profile</Button>
+          }
+        >
+          <Modal.Header>Select a Photo</Modal.Header>
+          <Modal.Content image>
+            <Image
+              wrapped
+              size="medium"
+              src="https://react.semantic-ui.com/images/avatar/large/rachel.png"
+            />
+            <Modal.Description>
+              <Header>Default Profile Image</Header>
+              <p>
+                We've found the following gravatar image associated with your
+                e-mail address.
+              </p>
+              <p>Is it okay to use this photo?</p>
+            </Modal.Description>
+          </Modal.Content>
+        </Modal>
+        {/* <Button className="edit-profile-button">Edit profile</Button> */}
       </div>
     );
   }
