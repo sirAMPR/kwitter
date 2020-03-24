@@ -2,7 +2,6 @@ import {
   domain,
   jsonHeaders,
   handleJsonResponse,
-  // getInitStateFromStorage,
   asyncInitialState,
   asyncCases,
   createActions,
@@ -16,14 +15,14 @@ const CREATE_USER = createActions("createUser");
 export const createUser = createUserData => dispatch => {
   dispatch(CREATE_USER.START());
 
-  return fetch(domain + "/users", {
+  return fetch(domain + "/users/", {
     method: "POST",
     headers: jsonHeaders,
     body: JSON.stringify(createUserData)
   })
     .then(handleJsonResponse)
     .then(result => dispatch(CREATE_USER.SUCCESS(result)))
-    .catch(err => Promise.reject(dispatch(CREATE_USER.FAIL(err))));
+    .catch(err => Promise.reject(dispatch(CREATE_USER.FAIL(err))))
 };
 
 // get user data
