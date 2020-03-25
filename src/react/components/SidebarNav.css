@@ -1,0 +1,17 @@
+#menu {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: flex-start;
+    align-items: flex-start;
+    
+}
+
+#menu-links{
+    text-align: left;
+}
+
+#header{
+    text-align: center;
+    display: flex
+}

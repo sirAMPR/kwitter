@@ -3,12 +3,13 @@ import { Menu } from "./components";
 import { userIsAuthenticated } from "./HOCs";
 import MessageList from "./components/MessageList";
 import CreateMessageForm from "./components/CreateMessageForm";
+import SidebarNav from "./components/SidebarNav"
 
 class MessageFeed extends React.Component {
   render() {
     return (
       <>
-        <Menu isAuthenticated={this.props.isAuthenticated} />
+        <SidebarNav isAuthenticated={this.props.isAuthenticated} />
         <h2>Message Feed</h2>
         <CreateMessageForm />
         <MessageList isUserList={false} />
