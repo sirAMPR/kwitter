@@ -2,7 +2,9 @@ import React from "react";
 import Spinner from "react-spinkit";
 import { connect } from "react-redux";
 import { createUser } from "../../redux";
-import "./LoginForm.css";
+import { withRouter } from "react-router-dom";
+import { Button, Form } from "semantic-ui-react";
+import "./SignupForm.css";
 
 class SignupForm extends React.Component {
   constructor(props) {
@@ -11,7 +13,6 @@ class SignupForm extends React.Component {
       username: "",
       displayName: "",
       password: ""
-      /* password_confirmation: "" */
     };
     this.handleSignup = this.handleSignup.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -20,6 +21,7 @@ class SignupForm extends React.Component {
   handleSignup = e => {
     e.preventDefault();
     this.props.createUser(this.state);
+    return this.props.history.push("/");
   };
   handleChange = e => {
     this.setState({ [e.target.name]: e.target.value });
@@ -28,9 +30,46 @@ class SignupForm extends React.Component {
   render() {
     const { loading, error } = this.props;
     return (
-      <React.Fragment>
+      <div className="signup-form-wrapper">
+        <h1>Sign Up for Klutter!</h1>
+        <Form id="signup-form" onSubmit={this.handleSignup}>
+          <Form.Field>
+            <label>Username</label>
+            <input
+              type="text"
+              name="username"
+              autoFocus
+              placeholder="Username"
+              required
+              onChange={this.handleChange}
+            />
+          </Form.Field>
+          <Form.Field>
+            <label>Display Name</label>
+            <input
+              type="text"
+              name="displayName"
+              placeholder="Display Name"
+              required
+              onChange={this.handleChange}
+            />
+          </Form.Field>
+          <Form.Field>
+            <label>Password</label>
+            <input
+              type="password"
+              placeholder="Password"
+              name="password"
+              required
+              onChange={this.handleChange}
+            />
+          </Form.Field>
+          <Button type="submit" disabled={loading}>
+            Register
+          </Button>
+        </Form>
+        {/* 
         <form id="signup-form" onSubmit={this.handleSignup}>
-          <h1>Sign Up for Klutter!</h1>
           <label htmlFor="username">Username</label>
           <input
             type="text"
@@ -56,92 +95,15 @@ class SignupForm extends React.Component {
             value={this.state.password}
             onChange={this.handleChange}
           />
-          {/* <label htmlFor="password_confirmation">Password confirmation</label>
-            <input
-                type="password" 
-                name="password_confirmation" 
-                required
-                value={this.state.password_confirmation} 
-                onChange={this.handleChange}
-            /> */}
           <button type="submit" disabled={loading}>
             Register
           </button>
-          {loading && <Spinner name="circle" color="blue" />}
-          {error && <p style={{ color: "red" }}>{error.message}</p>}
-        </form>
-      </React.Fragment>
+        </form> */}
+        {loading && <Spinner name="circle" color="blue" />}
+        {error && <p style={{ color: "red" }}>{error.message}</p>}
+      </div>
     );
   }
 }
 
-export default connect(null, { createUser })(SignupForm);
-
-// Dylan's code
-// import React, { Component } from "react";
-// import {domain} from "./redux/helpers/index.js";
-// export default class Registration extends Component {
-/* constructor(props) {
-        super(props);
-        this.state = {
-            email: "",
-            password: "",
-            password_confirmation: "",
-            registrationErrors: ""
-        }
-        this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleChange = this.handleChange.bind(this);
-    } */
-/* handleChange(event) {
-        this.setState({
-            [event.target.name]: event.target.value 
-        })
-    } */
-/* handleSubmit(event) {
-        event.preventDefault();
-         const {
-             email,
-             password,
-             password_confirmation,
-         } = this.state,;
-         domain.post("https://localhost:3000/users", {
-         user: {
-             email: email,
-             password: password,
-             password_confirmation: password_confirmation
-         }
-        },
-        { withCredentials: true}
-        
-        )}*/
-/* render(){
-        return <div>
-            <form onSubmit={this.handleSubmit}>
-                <input 
-                type="email" 
-                name="email" 
-                placeholder="Email" 
-                value={this.state.email} 
-                onChange={this.handleChange} 
-                required 
-                />
-                <input 
-                type="password" 
-                name="password" 
-                placeholder="Password" 
-                value={this.state.password} 
-                onChange={this.handleChange} 
-                required 
-                />
-                <input 
-                type="password" 
-                name="password_confirmation" 
-                placeholder="Password confirmation" 
-                value={this.state.password_confirmation} 
-                onChange={this.handleChange} 
-                required 
-                />
-            <button type="submit">Register </button>
-            </form>
-            </div>;
-        }*/
+export default connect(null, { createUser })(withRouter(SignupForm));

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Input, Button } from "semantic-ui-react";
 import { addMessage } from "../../redux";
+import "./CreateMessageForm.css";
 
 class CreateMessageForm extends Component {
   state = {
@@ -20,17 +21,20 @@ class CreateMessageForm extends Component {
 
   render() {
     return (
-      <>
+      <div id="wrapper">
         <form onSubmit={this.handlePost}>
           <Input
+            id="message-input"
             type="text"
             name="text"
             placeholder="Add your message"
             onChange={this.handleChange}
           ></Input>
-          <Button type="submit">Post</Button>
+          <Button id="post-button" type="submit">
+            Post
+          </Button>
         </form>
-      </>
+      </div>
     );
   }
 }

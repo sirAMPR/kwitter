@@ -3,11 +3,12 @@ import { Card } from "semantic-ui-react";
 import ToggleLikeButton from "./ToggleLikeButton";
 import DeleteMessageButton from "./DeleteMessageButton";
 import { connect } from "../HOCs";
+import "./Message.css"
 
 class Message extends Component {
   render() {
     return (
-      <Card>
+      <Card id= "messagecard">
         <Card.Content header={this.props.username} />
         <Card.Content description={this.props.text} />
         <Card.Content extra>

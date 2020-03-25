@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { ProfilePicSubmit, DeleteUserButton } from ".";
-import { getUser /*setProfilePic*/ } from "../../redux";
+import { getUser } from "../../redux";
 import { domain } from "../../redux/helpers";
 import { Button, Card, Image, Modal, Header } from "semantic-ui-react";
 import "./ProfileCard.css";
@@ -38,7 +38,6 @@ class ProfileCard extends React.Component {
     return (
       <div className="wrapper">
         <Card id="card">
-          {/* <Image src={domain + this.state.pictureLocation} wrapped ui={false} /> */}
           <Card.Content>
             <Card.Header>{this.state.displayName}</Card.Header>
             <Card.Meta>
@@ -76,7 +75,6 @@ class ProfileCard extends React.Component {
             </Modal.Description>
           </Modal.Content>
         </Modal>
-        {/* <Button className="edit-profile-button">Edit profile</Button> */}
       </div>
     );
   }

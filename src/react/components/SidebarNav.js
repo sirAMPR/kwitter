@@ -19,14 +19,14 @@ class SidebarNav extends React.Component {
 
     return (
       <div id="menu">
-        <h1 id = "header">Klutter</h1>
+        <h1 id = "title">Klutter</h1>
         <div id="menu-links">
         {this.props.isAuthenticated && (
           <Menu pointing secondary vertical>
             <Link to="/profiles/:username">
               <Menu.Item
                 name="Profile"
-                active={activeItem === "profile"}
+                active={activeItem === "Profile"}
                 onClick={this.handleItemClick}
               />
             </Link>

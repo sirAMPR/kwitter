@@ -21,6 +21,7 @@ class MessageList extends Component {
       <div className="message-list-wrapper">
         {this.state.messages.map(msg => (
           <Message
+          className="message"
             id={msg.id}
             createdAt={msg.createdAt}
             key={msg.id}
