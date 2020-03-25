@@ -1,4 +1,4 @@
-/* @import url("https://fonts.googleapis.com/css?family=Cedarville+Cursive&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Cedarville+Cursive&display=swap");
 
 #title {
   font-family: "Cedarville Cursive", cursive;
@@ -23,6 +23,6 @@
 #menu-links a {
   padding-right: 1em;
   color: white;
-  /* text-decoration: underline; */
-  /* cursor: pointer;
-} */ 
+  text-decoration: underline;
+  cursor: pointer;
+}

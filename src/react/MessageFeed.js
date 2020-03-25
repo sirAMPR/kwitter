@@ -9,13 +9,11 @@ class MessageFeed extends React.Component {
   render() {
     return (
       <>
-        <Grid>
+        <Grid id="grid">
           <GridColumn width={3}>
             <SidebarNav isAuthenticated={this.props.isAuthenticated} />
           </GridColumn>
           <GridColumn width={5}>
-            <h2>Message Feed</h2>
-
             <CreateMessageForm />
             <MessageList isUserList={false} />
           </GridColumn>

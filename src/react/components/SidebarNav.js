@@ -18,34 +18,35 @@ class SidebarNav extends React.Component {
     const { activeItem } = this.state;
 
     return (
-      <div id="menu">
-        <h1 id = "title">Klutter</h1>
-        <div id="menu-links">
-        {this.props.isAuthenticated && (
-          <Menu pointing secondary vertical>
-            <Link to="/profiles/:username">
-              <Menu.Item
-                name="Profile"
-                active={activeItem === "Profile"}
-                onClick={this.handleItemClick}
-              />
-            </Link>
-            <Link to="/messagefeed">
-              <Menu.Item
-                name="Message Feed"
-                active={activeItem === "Message Feed"}
-                onClick={this.handleItemClick}
-              />
-            </Link>
-            <Link to="/" onClick={this.handleLogout}>
-              <Menu.Item
-                name="Logout"
-                active={activeItem === "Logout"}
-                onClick={this.handleItemClick}
-              />
-            </Link>
-          </Menu>
-        )}
+      <div id="sidebar-menu">
+        <h1 id="title">Klutter</h1>
+        <h1 id="short-title">Kl</h1>
+        <div id="sidebar-menu-links">
+          {this.props.isAuthenticated && (
+            <Menu pointing secondary vertical>
+              <Link to="/profiles/:username">
+                <Menu.Item
+                  name="profile"
+                  active={activeItem === "profile"}
+                  onClick={this.handleItemClick}
+                />
+              </Link>
+              <Link to="/messagefeed">
+                <Menu.Item
+                  name="message feed"
+                  active={activeItem === "message feed"}
+                  onClick={this.handleItemClick}
+                />
+              </Link>
+              <Link to="/" onClick={this.handleLogout}>
+                <Menu.Item
+                  name="logout"
+                  active={activeItem === "logout"}
+                  onClick={this.handleItemClick}
+                />
+              </Link>
+            </Menu>
+          )}
         </div>
       </div>
     );
