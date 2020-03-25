@@ -1,9 +1,14 @@
 import React from "react";
-import { SignupForm } from ".";
+import { SignupForm, Menu } from ".";
 
 class Signup extends React.Component {
   render() {
-    return <SignupForm></SignupForm>;
+    return (
+      <>
+        <Menu></Menu>
+        <SignupForm></SignupForm>
+      </>
+    );
   }
 }
 
