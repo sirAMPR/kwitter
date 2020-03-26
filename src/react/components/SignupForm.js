@@ -68,37 +68,6 @@ class SignupForm extends React.Component {
             Register
           </Button>
         </Form>
-        {/* 
-        <form id="signup-form" onSubmit={this.handleSignup}>
-          <label htmlFor="username">Username</label>
-          <input
-            type="text"
-            name="username"
-            autoFocus
-            required
-            value={this.state.username}
-            onChange={this.handleChange}
-          />
-          <label htmlFor="displayName">Display Name</label>
-          <input
-            type="text"
-            name="displayName"
-            required
-            value={this.state.displayName}
-            onChange={this.handleChange}
-          />
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            name="password"
-            required
-            value={this.state.password}
-            onChange={this.handleChange}
-          />
-          <button type="submit" disabled={loading}>
-            Register
-          </button>
-        </form> */}
         {loading && <Spinner name="circle" color="blue" />}
         {error && <p style={{ color: "red" }}>{error.message}</p>}
       </div>
