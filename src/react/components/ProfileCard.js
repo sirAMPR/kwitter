@@ -1,9 +1,10 @@
 import React from "react";
 import { connect } from "react-redux";
-import { ProfilePicSubmit, DeleteUserButton } from ".";
+import { ProfileUpdateSubmit, DeleteUserButton } from ".";
 import { getUser } from "../../redux";
 import { domain } from "../../redux/helpers";
 import { Button, Card, Image, Modal, Header } from "semantic-ui-react";
+import { ProfileBioSubmit } from ".";
 import "./ProfileCard.css";
 
 class ProfileCard extends React.Component {
@@ -58,6 +59,19 @@ class ProfileCard extends React.Component {
         />
         <Modal
           trigger={
+            <Button className="edit-profile-bio-button">Edit Bio</Button>
+          }
+        >
+          <Modal.Header>Edit Bio</Modal.Header>
+          <Modal.Content>
+            <Modal.Description>
+              <Header>Update Bio</Header>
+              <ProfileBioSubmit />
+            </Modal.Description>
+          </Modal.Content>
+        </Modal>
+        <Modal
+          trigger={
             <Button className="edit-profile-button">Edit Profile</Button>
           }
         >
@@ -70,7 +84,7 @@ class ProfileCard extends React.Component {
             />
             <Modal.Description>
               <Header>Choose Profile Picture</Header>
-              <ProfilePicSubmit />
+              <ProfileUpdateSubmit />
               <DeleteUserButton />
             </Modal.Description>
           </Modal.Content>

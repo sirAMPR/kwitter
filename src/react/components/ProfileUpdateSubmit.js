@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { setProfilePic } from "../../redux";
 import { Button } from "semantic-ui-react";
 
-class ProfilePicSubmit extends React.Component {
+class ProfileUpdateSubmit extends React.Component {
   state = {
     picture: ""
   };
@@ -36,4 +36,4 @@ export default connect(
     error: state.user.setProfilePic.error
   }),
   { setProfilePic }
-)(ProfilePicSubmit);
+)(ProfileUpdateSubmit);

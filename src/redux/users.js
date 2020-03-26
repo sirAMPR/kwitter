@@ -41,6 +41,22 @@ export const getUser = () => (dispatch, getState) => {
     .catch(err => Promise.reject(dispatch(GET_USER.FAIL(err))));
 };
 
+const SET_PROFILE_BIO = createActions("setProfileBio");
+export const setProfileBio = setProfileBioData => (dispatch, getState) => {
+  dispatch(SET_PROFILE_BIO.START());
+
+  const { username, token } = getState().auth.login.result;
+  
+  return fetch(domain + "/users/" + username, {
+    method: "PATCH",
+    headers: { Authorization: "Bearer " + token, ...jsonHeaders },
+    body: JSON.stringify(setProfileBioData)
+  })
+    .then(handleJsonResponse)
+    .then(result => dispatch(SET_PROFILE_BIO.SUCCESS(result)))
+    .catch(err => Promise.reject(dispatch(SET_PROFILE_BIO.FAIL(err))));
+};
+
 // set profile picture
 const SET_PROFILE_PIC = createActions("setProfilePic");
 export const setProfilePic = setProfilePicData => (dispatch, getState) => {
@@ -83,6 +99,9 @@ export const reducers = {
   }),
   getUser: createReducer(asyncInitialState, {
     ...asyncCases(GET_USER)
+  }),
+  setProfileBio: createReducer(asyncInitialState, {
+    ...asyncCases(SET_PROFILE_BIO)
   }),
   setProfilePic: createReducer(asyncInitialState, {
     ...asyncCases(SET_PROFILE_PIC)
