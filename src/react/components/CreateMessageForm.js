@@ -11,7 +11,7 @@ class CreateMessageForm extends Component {
 
   handlePost = e => {
     e.preventDefault();
-    this.props.addMessage(this.state);
+    this.props.addMessage(this.state).then(e => window.location.reload());
     this.setState({ text: "" });
   };
 
