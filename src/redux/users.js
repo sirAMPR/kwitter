@@ -22,7 +22,7 @@ export const createUser = createUserData => dispatch => {
   })
     .then(handleJsonResponse)
     .then(result => dispatch(CREATE_USER.SUCCESS(result)))
-    .catch(err => Promise.reject(dispatch(CREATE_USER.FAIL(err))))
+    .catch(err => Promise.reject(dispatch(CREATE_USER.FAIL(err))));
 };
 
 // get user data
@@ -47,7 +47,6 @@ export const setProfilePic = setProfilePicData => (dispatch, getState) => {
   dispatch(SET_PROFILE_PIC.START());
 
   let data = new FormData(setProfilePicData);
-  console.log(data);
 
   const { username, token } = getState().auth.login.result;
 
@@ -70,12 +69,12 @@ export const deleteUser = deleteUserData => (dispatch, getState) => {
 
   return fetch(domain + `/users/${username}`, {
     method: "DELETE",
-    headers: { Authorization: "Bearer " + token, ...jsonHeaders },
+    headers: { Authorization: "Bearer " + token, ...jsonHeaders }
   })
     .then(handleJsonResponse)
     .then(result => dispatch(DELETE_USER.SUCCESS(result)))
     .catch(err => Promise.reject(dispatch(SET_PROFILE_PIC.FAIL(err))))
-    .then((result) => dispatch(LOGOUT.SUCCESS(result)))
+    .then(result => dispatch(LOGOUT.SUCCESS(result)));
 };
 
 export const reducers = {
