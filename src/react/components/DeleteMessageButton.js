@@ -4,22 +4,22 @@ import { connect } from "../HOCs";
 import { deleteMessage } from "../../redux";
 
 class DeleteMessageButton extends Component {
-  handleDelete = e => {
-    const confirm = window.confirm("do you wnat to delete");
-    if (confirm) {
-      this.props
-        .deleteMessage(this.props.id)
-        .then(e => window.location.reload());
-    }
-  };
-  render() {
-    return (
-      <Button icon onClick={this.handleDelete}>
-        <Icon name="trash" />
-        Delete
-      </Button>
-    );
-  }
+    handleDelete = e => {
+       const confirm = window.confirm("Do you want to delete this message?");
+       if(confirm){
+         this.props
+            .deleteMessage(this.props.id)
+            .then(e => window.location.reload());
+       }
+    };
+    render() {
+      return (
+        <Button icon onClick={this.handleDelete}>
+          <Icon name="trash" />
+          Delete
+        </Button>
+      );
+  } 
 }
 
 export default connect(
