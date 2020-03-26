@@ -16,7 +16,6 @@ class ProfilePicSubmit extends React.Component {
   render() {
     return (
       <>
-        {/* <label htmlFor="avatar">Choose a profile picture</label> */}
         <form onSubmit={this.handleSubmit}>
           <input
             type="file"
