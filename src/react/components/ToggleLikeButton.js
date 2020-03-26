@@ -7,7 +7,6 @@ class ToggleLikeButton extends Component {
   handleLike = e => {
     e.preventDefault();
     // check if like exists
-    // if (this.props.likes.some(like => like.username === this.props.username)) {
     for (let i = 0; i < this.props.likes.length; i++) {
       if (this.props.likes[i].username === this.props.username) {
         // delete like

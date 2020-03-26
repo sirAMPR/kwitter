@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Message } from ".";
-// import { userIsAuthenticated } from "../HOCs";
 import { listMessage } from "../../redux";
 import "./MessageList.css";
 

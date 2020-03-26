@@ -1,12 +1,11 @@
 import {
-  domain,
-  jsonHeaders,
-  handleJsonResponse,
-  // getInitStateFromStorage,
-  asyncInitialState,
-  asyncCases,
-  createActions,
-  createReducer
+    domain,
+    jsonHeaders,
+    handleJsonResponse,
+    asyncInitialState,
+    asyncCases,
+    createActions,
+    createReducer
 } from "./helpers";
 
 const url = domain + "/messages";
