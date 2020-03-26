@@ -11,12 +11,16 @@ class ToggleLikeButton extends Component {
     for (let i = 0; i < this.props.likes.length; i++) {
       if (this.props.likes[i].username === this.props.username) {
         // delete like
-        this.props.deleteLike(this.props.likes[i].id);
+        this.props
+          .deleteLike(this.props.likes[i].id)
+          .then(e => window.location.reload());
         return;
       }
     }
     // add like
-    this.props.like({ messageId: this.props.id });
+    this.props
+      .like({ messageId: this.props.id })
+      .then(e => window.location.reload());
   };
 
   render() {
