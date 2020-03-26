@@ -10,7 +10,7 @@ class ProfilePicSubmit extends React.Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    this.props.setProfilePic(e.target);
+    this.props.setProfilePic(e.target).then(e => window.location.reload());
   };
 
   render() {
