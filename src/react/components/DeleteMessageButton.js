@@ -5,19 +5,17 @@ import {deleteMessage} from "../../redux"
  
 class DeleteMessageButton extends Component {
     handleDelete = e => {
-       const confirm = window.confirm("do you wnat to delete");
+       const confirm = window.confirm("Do you want to delete this message?");
        if(confirm){
          this.props.deleteMessage(this.props.id)
        }
     };
     render() {
       return (
-         
         <Button icon onClick={this.handleDelete}>
           <Icon name="trash" />
           Delete
         </Button>
-        
       );
   } 
 }

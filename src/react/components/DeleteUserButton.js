@@ -6,7 +6,10 @@ import { deleteUser } from "../../redux";
 class DeleteUser extends React.Component {
   handleDelete = e => {
     e.preventDefault();
-    this.props.deleteUser();
+    const confirm = window.confirm("Do you want to delete this user?")
+    if(confirm){
+      this.props.deleteUser(this.props.id);
+    }
   };
 
   render() {
