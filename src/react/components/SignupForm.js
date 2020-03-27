@@ -10,6 +10,8 @@ import { Link } from "react-router-dom";
 import logo from "./klutter_logo_small.jpg";
 import "./SignupForm.css";
 
+// Ruben Espino helped me install the Google Login advanced feature
+
 class SignupForm extends React.Component {
   constructor(props) {
     super(props);
@@ -45,7 +47,7 @@ class SignupForm extends React.Component {
       }
       console.log(googleUserData);
 
-      this.props.signup(googleUserData).then(() =>
+      this.props.createUser(googleUserData).then(() =>
       this.props.login({
         username: googleUserData.username,
         password: googleUserData.password
