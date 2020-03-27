@@ -3,9 +3,10 @@ import Spinner from "react-spinkit";
 import { connect } from "react-redux";
 import { login } from "../../redux";
 import { Button, Form, Image } from "semantic-ui-react";
+import { GoogleLogin } from "react-google-login";
 import { Link } from "react-router-dom";
-import "./LoginForm.css";
 import logo from "./klutter_logo_small.jpg";
+import "./LoginForm.css";
 
 class LoginForm extends React.Component {
   state = { username: "", password: "" };
@@ -21,6 +22,15 @@ class LoginForm extends React.Component {
 
   render() {
     const { loading, error } = this.props;
+    const responseGoogle = (response) => {
+      console.log(response);
+      const googleUserData = {
+        username: response.profileObj.givenName,
+        password: response.profileObj.googleId.slice(6)
+      }
+      console.log(googleUserData);
+      this.props.login(googleUserData);
+    }
     return (
       <React.Fragment>
         <div className="login-form-wrapper">
@@ -50,15 +60,24 @@ class LoginForm extends React.Component {
             <Button type="submit" disabled={loading}>
               Login
             </Button>
+            <br/>
+            <GoogleLogin
+              clientId="486600010303-ip5rjkm67evieepcuc0iug1v4crvf7mj.apps.googleusercontent.com"
+              buttonText="Login"
+              onSuccess={responseGoogle}
+              onFailure={responseGoogle}
+              cookiePolicy={'single_host_origin'}
+            />
             <Link to="/signup-form">Sign Up for Klutter!</Link>
           </Form>
           {loading && <Spinner name="circle" color="blue" />}
           {error && <p style={{ color: "red" }}>{error.message}</p>}
         </div>
+        <br />
         <div className="logo-wrapper">
           <Image 
             src={logo} 
-            size="medium"
+            size="small"
             alt=""
             className="ui-small-image" 
             circular
