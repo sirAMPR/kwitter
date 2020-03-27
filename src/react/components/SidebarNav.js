@@ -3,12 +3,13 @@ import { Link } from "react-router-dom";
 import "./SidebarNav.css";
 import { connect } from "react-redux";
 import { logout } from "../../redux";
-import { Menu } from "semantic-ui-react";
+import { Menu, Image } from "semantic-ui-react";
+import logo from "./klutter_logo_small.jpg";
 
 class SidebarNav extends React.Component {
-  state = { activeItem: "profile" };
-  handleLogout = event => {
-    event.preventDefault();
+  state = { activeItem: "Profile" };
+  handleLogout = e => {
+    e.preventDefault();
     this.props.logout();
   };
 
@@ -20,6 +21,16 @@ class SidebarNav extends React.Component {
     return (
       <div id="menu">
         <h1 id = "title">Klutter</h1>
+        <div className="logo-wrapper">
+          <Image 
+            src={logo} 
+            size="small"
+            alt=""
+            className="ui-small-image" 
+            circular
+          />
+        </div>
+        <br/>
         <div id="menu-links">
         {this.props.isAuthenticated && (
           <Menu pointing secondary vertical>
