@@ -25,7 +25,9 @@ class SignupForm extends React.Component {
   handleSignup = e => {
     e.preventDefault();
     this.props.createUser(this.state);
-    return this.props.history.push("/");
+    if (this.props.error === null) {
+      return this.props.history.push("/");
+    }
   };
   
   handleChange = e => {
@@ -117,4 +119,11 @@ class SignupForm extends React.Component {
   }
 }
 
-export default connect(null, { createUser, login })(withRouter(SignupForm));
+export default connect(
+  state => ({
+    result: state.user.createUser.result,
+    loading: state.user.createUser.loading,
+    error: state.user.createUser.error
+  }),
+  { createUser, login }
+)(withRouter(SignupForm));
